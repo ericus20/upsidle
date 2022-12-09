@@ -7,6 +7,8 @@
 plugins {
     // Apply the java Plugin to add support for Java.
     id 'java'
+    id 'idea'
+    id 'eclipse'
 }
 
 repositories {
@@ -15,18 +17,47 @@ repositories {
 }
 
 dependencies {
+    implementation 'org.apache.httpcomponents:httpclient'
     constraints {
         // Define dependency versions as constraints
+        implementation('org.apache.httpcomponents:httpclient:4.5.3') {
+            because 'previous versions have a bug impacting this application'
+        }
+        implementation('commons-codec:commons-codec:1.11') {
+            because 'version 1.9 pulled from httpclient has bugs affecting this application'
+        }
         implementation 'org.apache.commons:commons-text:1.9'
+    }
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(19)
     }
 }
 
 testing {
     suites {
-        // Configure the built-in test suite
         test {
-            // Use JUnit Jupiter test framework
-            useJUnitJupiter('5.9.1')
+            useJUnitJupiter()
+        }
+
+        integrationTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
         }
     }
+}
+
+tasks.named('check') {
+    dependsOn(testing.suites.integrationTest)
 }
