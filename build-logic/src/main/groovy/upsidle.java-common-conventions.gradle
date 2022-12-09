@@ -9,6 +9,9 @@ plugins {
     id 'java'
     id 'idea'
     id 'eclipse'
+
+    // NOTE: external plugin version is specified in implementation dependency artifact of the project's build file
+    id 'com.diffplug.spotless'
 }
 
 repositories {
