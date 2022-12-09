@@ -1,0 +1,6 @@
+plugins {
+    id 'upsidle.java-library-conventions'
+}
+
+group 'org.example'
+version 'unspecified'

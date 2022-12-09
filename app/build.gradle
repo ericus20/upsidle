@@ -9,10 +9,7 @@ plugins {
 }
 
 dependencies {
-    implementation project(':utilities')
-}
+    implementation 'org.springframework.boot:spring-boot-starter-web'
 
-application {
-    // Define the main class for the application.
-    mainClass = 'upsidle.app.App'
+    implementation project(':utilities')
 }

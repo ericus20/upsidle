@@ -7,6 +7,13 @@
 plugins {
     // Support convention plugins written in Groovy. Convention plugins are build scripts in 'src/main' that automatically become available as plugins in the main build.
     id 'groovy-gradle-plugin'
+    id 'org.graalvm.buildtools.native' version '0.9.18'
+}
+
+ext {
+    spotlessVersion = '6.12.0'
+    springBootVersion = '3.0.0'
+    springDependencyManagementVersion = '1.1.0'
 }
 
 repositories {
@@ -15,5 +22,7 @@ repositories {
 }
 
 dependencies {
-    implementation 'com.diffplug.spotless:spotless-plugin-gradle:6.12.0'
+    implementation "com.diffplug.spotless:spotless-plugin-gradle:${spotlessVersion}"
+    implementation "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
+    implementation "io.spring.gradle:dependency-management-plugin:${springDependencyManagementVersion}"
 }

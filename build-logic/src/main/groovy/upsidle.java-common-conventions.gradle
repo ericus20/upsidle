@@ -5,7 +5,6 @@
  */
 
 plugins {
-    // Apply the java Plugin to add support for Java.
     id 'pmd'
     id 'java'
     id 'idea'
@@ -15,6 +14,9 @@ plugins {
     // NOTE: external plugin version is specified in implementation dependency artifact of the project's build file
     id 'com.diffplug.spotless'
 }
+
+group 'com.developersboard'
+version '1.0.0'
 
 repositories {
     // Use Maven Central for resolving dependencies.

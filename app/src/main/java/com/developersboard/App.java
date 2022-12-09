@@ -3,15 +3,13 @@
  */
 package com.developersboard;
 
-final class App {
-  private App() {
-    // Prevent instantiation
-    // Optional: throw an exception e.g. AssertionError
-    // if this ever *is* called
-    throw new AssertionError("Instantiating utility class...");
-  }
+import org.springframework.boot.SpringApplication;
+import org.springframework.boot.autoconfigure.SpringBootApplication;
+
+@SpringBootApplication
+class App {
 
   public static void main(String[] args) {
-    // main method stuff
+    SpringApplication.run(App.class, args);
   }
 }
