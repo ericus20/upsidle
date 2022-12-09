@@ -7,7 +7,13 @@
 plugins {
     // Apply the common convention plugin for shared build configuration between library and application projects.
     id 'upsidle.java-common-conventions'
+    id 'test-report-aggregation'
 
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
+
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('testAggregateTestReport', TestReport)
 }

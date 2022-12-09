@@ -6,8 +6,10 @@
 
 plugins {
     // Apply the java Plugin to add support for Java.
+    id 'pmd'
     id 'java'
     id 'idea'
+    id 'jacoco'
     id 'eclipse'
 
     // NOTE: external plugin version is specified in implementation dependency artifact of the project's build file
@@ -20,16 +22,8 @@ repositories {
 }
 
 dependencies {
-    implementation 'org.apache.httpcomponents:httpclient'
     constraints {
         // Define dependency versions as constraints
-        implementation('org.apache.httpcomponents:httpclient:4.5.3') {
-            because 'previous versions have a bug impacting this application'
-        }
-        implementation('commons-codec:commons-codec:1.11') {
-            because 'version 1.9 pulled from httpclient has bugs affecting this application'
-        }
-        implementation 'org.apache.commons:commons-text:1.9'
     }
 }
 
@@ -53,6 +47,7 @@ testing {
             targets {
                 all {
                     testTask.configure {
+                        maxHeapSize = '512m'
                         shouldRunAfter(test)
                     }
                 }
@@ -63,4 +58,61 @@ testing {
 
 tasks.named('check') {
     dependsOn(testing.suites.integrationTest)
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-Xlint:deprecation']
+    dependsOn 'spotlessApply'
+}
+
+tasks.withType(Test).configureEach {
+    finalizedBy 'jacocoTestReport'
+    // Fail the 'test' task on the first test failure
+    failFast = true
+    maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+spotless {
+    format 'misc', {
+        // define the files to apply `misc` to
+        target '*.gradle', '*.md', '.gitignore'
+
+        // define the steps to apply to those files
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+    }
+
+    java {
+
+        // define the steps to apply to those files
+        trimTrailingWhitespace()
+        indentWithSpaces()
+        endWithNewline()
+        removeUnusedImports()
+        googleJavaFormat()
+    }
+}
+
+jacocoTestReport {
+    executionData(fileTree(project.buildDir).include("jacoco/*.exec"))
+    reports {
+        xml.required = true
+        html.required = true
+        csv.required = true
+    }
+
+    afterEvaluate {
+        classDirectories.setFrom(files(classDirectories.files.collect {
+            fileTree(dir: it, exclude: [
+
+            ])
+        }))
+    }
+}
+
+pmd {
+    consoleOutput = true
+    ruleSetFiles = files("${project.rootDir}/config/pmd-ruleset.xml")
+    ruleSets = []
 }
