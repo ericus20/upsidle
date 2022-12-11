@@ -24,6 +24,11 @@ repositories {
 }
 
 dependencies {
+
+    // Dev Tools
+    compileOnly 'org.projectlombok:lombok'
+    annotationProcessor 'org.projectlombok:lombok'
+
     constraints {
         // Define dependency versions as constraints
     }

@@ -10,6 +10,7 @@ plugins {
 
     // Apply the java-library plugin for API and implementation separation.
     id 'java-library'
+    id 'java-test-fixtures'
     id 'org.springframework.boot'
     id 'io.spring.dependency-management'
 }
@@ -23,5 +24,31 @@ configurations {
 }
 
 dependencies {
-    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+
+    api 'org.springframework.boot:spring-boot-starter-security'
+    api 'org.springframework.boot:spring-boot-starter-actuator'
+    api 'org.springframework.boot:spring-boot-starter-validation'
+
+    // Dev Tools
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    annotationProcessor 'org.springframework.boot:spring-boot-configuration-processor'
+
+    testFixturesApi 'org.mockito:mockito-inline'
+    testFixturesApi 'com.jparams:to-string-verifier:1.4.8'
+    testFixturesApi 'nl.jqno.equalsverifier:equalsverifier:3.12.2'
+    testFixturesApi 'org.springframework.boot:spring-boot-starter-test'
+    testFixturesApi 'org.springframework.security:spring-security-test'
+}
+
+bootJar {
+    enabled = false
+}
+
+task testJar(type: Jar, dependsOn: testClasses) {
+    from sourceSets.test.output
+    classifier 'tests'
+}
+
+artifacts {
+    testArtifacts testJar
 }

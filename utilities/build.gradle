@@ -9,5 +9,10 @@ plugins {
 }
 
 dependencies {
-    api project(':list')
+    api 'commons-io:commons-io:2.11.0'
+
+    // Projects
+    api project(':base')
+
+    testImplementation project(path: ':base', configuration: 'testArtifacts')
 }

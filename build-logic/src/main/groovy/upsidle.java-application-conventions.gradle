@@ -16,6 +16,10 @@ plugins {
 
 }
 
+bootJar {
+    enabled = true
+}
+
 tasks.named('check') {
     dependsOn tasks.named('testAggregateTestReport', TestReport)
 }

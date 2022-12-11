@@ -7,9 +7,9 @@ import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 
 @SpringBootApplication
-class App {
+class Upsidle {
 
   public static void main(String[] args) {
-    SpringApplication.run(App.class, args);
+    SpringApplication.run(Upsidle.class, args);
   }
 }

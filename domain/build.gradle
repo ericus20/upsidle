@@ -3,7 +3,12 @@ plugins {
 }
 
 dependencies {
-    api project(':base')
 
-    testImplementation(testFixtures(project(":base")))
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+
+    // Projects
+    api project(':base')
+    api project(':utilities')
+
+    testImplementation project(path: ':base', configuration: 'testArtifacts')
 }
