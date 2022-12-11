@@ -1,0 +1,20 @@
+
+# ===============================
+# = DATA SOURCE
+# ===============================
+spring:
+  datasource:
+    url: jdbc:h2:mem:test;MODE=PostgreSQL;DB_CLOSE_ON_EXIT=FALSE
+    username: sa
+    password:
+    driver-class-name: org.h2.Driver
+
+  ## ===============================
+  ## = JPA / HIBERNATE
+  ## ===============================
+  jpa:
+    database-platform: org.hibernate.dialect.H2Dialect
+    show-sql: true
+    properties:
+      hibernate:
+        format_sql: true

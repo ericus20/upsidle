@@ -1,6 +1,6 @@
 package com.developersboard.entity.base;
 
-import com.developersboard.utils.security.SecurityUtils;
+import com.developersboard.security.SecurityUtils;
 import java.util.Optional;
 import lombok.EqualsAndHashCode;
 import lombok.ToString;
@@ -12,8 +12,8 @@ import org.springframework.lang.NonNull;
  * user.
  *
  * @author Eric Opoku
- * @version 1.0
- * @since 1.0
+ * @version 1.0.0
+ * @since 1.0.0
  */
 @ToString
 @EqualsAndHashCode

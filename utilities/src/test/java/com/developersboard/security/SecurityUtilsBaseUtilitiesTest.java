@@ -1,14 +1,13 @@
 package com.developersboard.security;
 
-import com.developersboard.UtilitiesTestUtils;
-import com.developersboard.utils.security.SecurityUtils;
+import com.developersboard.BaseUtilitiesTest;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 import org.junit.platform.commons.util.ReflectionUtils;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-class SecurityUtilsTest extends UtilitiesTestUtils {
+class SecurityUtilsBaseUtilitiesTest extends BaseUtilitiesTest {
 
   @BeforeEach
   void setUp() {

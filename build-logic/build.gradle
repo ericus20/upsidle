@@ -13,7 +13,6 @@ plugins {
 ext {
     set('spotlessVersion', '6.12.0')
     set('springBootVersion', '3.0.0')
-    set('testcontainersVersion', "1.17.6")
     set('springDependencyManagementVersion', '1.1.0')
 }
 
@@ -26,5 +25,4 @@ dependencies {
     implementation "com.diffplug.spotless:spotless-plugin-gradle:${spotlessVersion}"
     implementation "org.springframework.boot:spring-boot-gradle-plugin:${springBootVersion}"
     implementation "io.spring.gradle:dependency-management-plugin:${springDependencyManagementVersion}"
-    implementation "org.testcontainers:testcontainers-bom:${testcontainersVersion}"
 }

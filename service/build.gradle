@@ -1,0 +1,11 @@
+plugins {
+    id 'upsidle.java-library-conventions'
+}
+
+dependencies {
+
+    // Projects
+    implementation project(':domain')
+
+    testImplementation(testFixtures(project(':base')))
+}

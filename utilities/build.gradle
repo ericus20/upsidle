@@ -10,9 +10,11 @@ plugins {
 
 dependencies {
     api 'commons-io:commons-io:2.11.0'
+    api 'net.datafaker:datafaker:1.7.0'
+    api 'com.google.code.gson:gson:2.10'
 
     // Projects
     api project(':base')
 
-    testImplementation project(path: ':base', configuration: 'testArtifacts')
+    testImplementation(testFixtures(project(':base')))
 }

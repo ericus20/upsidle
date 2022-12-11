@@ -7,4 +7,4 @@ package com.developersboard;
  * @version 1.0
  * @since 1.0
  */
-public class UtilitiesTestUtils extends TestUtils {}
+public class BaseUtilitiesTest extends BaseTest {}

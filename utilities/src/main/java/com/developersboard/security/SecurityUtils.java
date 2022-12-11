@@ -1,4 +1,4 @@
-package com.developersboard.utils.security;
+package com.developersboard.security;
 
 import com.developersboard.constant.ErrorConstants;
 import java.util.Objects;

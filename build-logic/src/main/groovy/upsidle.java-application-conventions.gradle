@@ -16,10 +16,38 @@ plugins {
 
 }
 
+testing {
+    suites {
+        integrationTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        maxHeapSize = '512m'
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
+    }
+}
+
+tasks.named('check') {
+    dependsOn(testing.suites.integrationTest)
+}
+
 bootJar {
     enabled = true
 }
 
-tasks.named('check') {
+tasks.named('integrationTestAggregateTestReport') {
     dependsOn tasks.named('testAggregateTestReport', TestReport)
+    mustRunAfter 'testAggregateTestReport'
+}
+
+tasks.named('check') {
+    dependsOn tasks.named('integrationTestAggregateTestReport', TestReport)
 }

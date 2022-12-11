@@ -14,5 +14,5 @@ pluginManagement {
 }
 
 rootProject.name = 'upsidle'
-include 'app', 'utilities', 'domain', 'base'
+include 'app', 'web', 'service', 'domain', 'utilities', 'base'
 

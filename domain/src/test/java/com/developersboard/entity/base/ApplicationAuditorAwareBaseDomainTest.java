@@ -1,6 +1,7 @@
 package com.developersboard.entity.base;
 
-import com.developersboard.DomainTestUtils;
+import com.developersboard.BaseDomainTest;
+import com.developersboard.BaseTest;
 import com.jparams.verifier.tostring.NameStyle;
 import com.jparams.verifier.tostring.ToStringVerifier;
 import java.util.Optional;
@@ -11,7 +12,7 @@ import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInfo;
 import org.springframework.security.core.context.SecurityContextHolder;
 
-class ApplicationAuditorAwareTest extends DomainTestUtils {
+class ApplicationAuditorAwareBaseDomainTest extends BaseDomainTest {
 
   @BeforeEach
   void setUp() {
@@ -33,7 +34,7 @@ class ApplicationAuditorAwareTest extends DomainTestUtils {
    */
   @Test
   void shouldReturnSystemWhenUserIsAnonymousAndNotAuthenticated() {
-    DomainTestUtils.setAnonymousAuthentication(DomainTestUtils.ANONYMOUS_USER);
+    setAuthentication(BaseTest.ANONYMOUS_USER, ANONYMOUS_ROLE);
 
     var authentication = SecurityContextHolder.getContext().getAuthentication();
     Assertions.assertTrue(authentication.isAuthenticated());
@@ -48,7 +49,7 @@ class ApplicationAuditorAwareTest extends DomainTestUtils {
    */
   @Test
   void shouldReturnSystemWhenAuthenticatedUserIsAnonymous() {
-    DomainTestUtils.setAnonymousAuthentication(DomainTestUtils.ANONYMOUS_USER);
+    setAuthentication(BaseTest.ANONYMOUS_USER, ANONYMOUS_ROLE);
 
     var authentication = SecurityContextHolder.getContext().getAuthentication();
     Assertions.assertAll(
@@ -61,7 +62,7 @@ class ApplicationAuditorAwareTest extends DomainTestUtils {
 
   @Test
   void getCurrentAuditorWithAuthenticatedUser(TestInfo testInfo) {
-    DomainTestUtils.setAuthentication(testInfo.getDisplayName(), DomainTestUtils.ROLE_USER);
+    setAuthentication(testInfo.getDisplayName(), BaseDomainTest.ROLE_USER);
     Assertions.assertEquals(testInfo.getDisplayName(), getAuditor());
   }
 

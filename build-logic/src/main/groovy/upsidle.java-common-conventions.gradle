@@ -15,9 +15,6 @@ plugins {
     id 'com.diffplug.spotless'
 }
 
-group 'com.developersboard'
-version '1.0.0'
-
 repositories {
     // Use Maven Central for resolving dependencies.
     mavenCentral()
@@ -28,6 +25,10 @@ dependencies {
     // Dev Tools
     compileOnly 'org.projectlombok:lombok'
     annotationProcessor 'org.projectlombok:lombok'
+
+    testImplementation 'org.mockito:mockito-inline'
+    testImplementation 'com.jparams:to-string-verifier:1.4.8'
+    testImplementation 'nl.jqno.equalsverifier:equalsverifier:3.12.2'
 
     constraints {
         // Define dependency versions as constraints
@@ -40,36 +41,8 @@ java {
     }
 }
 
-testing {
-    suites {
-        test {
-            useJUnitJupiter()
-        }
-
-        integrationTest(JvmTestSuite) {
-            dependencies {
-                implementation project()
-            }
-
-            targets {
-                all {
-                    testTask.configure {
-                        maxHeapSize = '512m'
-                        shouldRunAfter(test)
-                    }
-                }
-            }
-        }
-    }
-}
-
-tasks.named('check') {
-    dependsOn(testing.suites.integrationTest)
-}
-
-tasks.withType(JavaCompile).configureEach {
-    options.compilerArgs += ['-Xlint:deprecation']
-    dependsOn 'spotlessApply'
+tasks.named('test') {
+    useJUnitPlatform()
 }
 
 tasks.withType(Test).configureEach {
@@ -77,6 +50,11 @@ tasks.withType(Test).configureEach {
     // Fail the 'test' task on the first test failure
     failFast = true
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+tasks.withType(JavaCompile).configureEach {
+    options.compilerArgs += ['-Xlint:deprecation']
+    dependsOn 'spotlessApply'
 }
 
 spotless {
@@ -120,6 +98,6 @@ jacocoTestReport {
 
 pmd {
     consoleOutput = true
-    ruleSetFiles = files("${project.rootDir}/config/pmd-ruleset.xml")
+    ruleSetFiles = files("${project.rootDir}/build-logic/config/pmd-ruleset.xml")
     ruleSets = []
 }
