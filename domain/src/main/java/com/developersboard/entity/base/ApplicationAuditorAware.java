@@ -20,6 +20,9 @@ import org.springframework.lang.NonNull;
 public final class ApplicationAuditorAware implements AuditorAware<String> {
   private static final String CURRENT_AUDITOR = "system";
 
+  /** Creates a new {@code ApplicationAuditorAware} instance. */
+  public ApplicationAuditorAware() {}
+
   @NonNull
   @Override
   public Optional<String> getCurrentAuditor() {

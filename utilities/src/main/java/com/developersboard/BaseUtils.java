@@ -13,4 +13,6 @@ public class BaseUtils {
 
   /** The Constant FAKER. */
   public static final Faker FAKER = new Faker();
+
+  BaseUtils() {}
 }

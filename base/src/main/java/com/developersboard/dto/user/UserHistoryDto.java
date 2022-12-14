@@ -19,6 +19,13 @@ import lombok.EqualsAndHashCode;
 public final class UserHistoryDto extends BaseDto implements Serializable {
   @Serial private static final long serialVersionUID = -8842211126703873453L;
 
+  /**
+   * The type of modification made to the user.
+   *
+   * @see UserHistoryType
+   */
   private UserHistoryType userHistoryType;
-  private String timeElapsedDescription;
+
+  /** Creates a new {@code UserHistoryDto} instance. */
+  public UserHistoryDto() {}
 }

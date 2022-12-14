@@ -17,7 +17,7 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface RoleMapper {
 
-  /** The mapper instance. */
+  /** The {@code RoleMapper} instance to provide access to the mapper implementation. */
   RoleMapper MAPPER = Mappers.getMapper(RoleMapper.class);
 
   /**
@@ -26,7 +26,7 @@ public interface RoleMapper {
    * @param role Role
    * @return the RoleDto
    */
-  RoleDto toUserDto(Role role);
+  RoleDto toRoleDto(Role role);
 
   /**
    * Convert and populate a roleDto to role object.
@@ -34,5 +34,5 @@ public interface RoleMapper {
    * @param roleDto the roleDto
    * @return the Role
    */
-  Role toUserDto(RoleDto roleDto);
+  Role toRoleDto(RoleDto roleDto);
 }

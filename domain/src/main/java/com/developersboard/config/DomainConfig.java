@@ -12,6 +12,13 @@ import org.springframework.data.jpa.repository.config.EnableJpaAuditing;
 import org.springframework.data.jpa.repository.config.EnableJpaRepositories;
 import org.springframework.transaction.annotation.EnableTransactionManagement;
 
+/**
+ * DomainConfig allows JPA configurations to be specified for this application.
+ *
+ * @author Eric Opoku
+ * @version 1.0.0
+ * @since 1.0.0
+ */
 @Configuration
 @EnableTransactionManagement
 @EntityScan("com.developersboard.entity")
@@ -19,10 +26,13 @@ import org.springframework.transaction.annotation.EnableTransactionManagement;
 @EnableJpaAuditing(auditorAwareRef = "auditorAware", dateTimeProviderRef = "dateTimeProvider")
 public class DomainConfig {
 
+  /** Creates a new {@code DomainConfig} instance. */
+  public DomainConfig() {}
+
   /**
-   * AuditorAware bean used for auditing.
+   * {@return Application implementation of AuditorAware}
    *
-   * @return Application implementation of AuditorAware.
+   * @see ApplicationAuditorAware
    */
   @Bean
   public AuditorAware<String> auditorAware() {

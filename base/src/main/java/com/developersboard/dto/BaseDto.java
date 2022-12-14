@@ -21,4 +21,7 @@ public class BaseDto {
   private String createdBy;
   private OffsetDateTime createdAt;
   private OffsetDateTime updatedAt;
+
+  /** Creates a new {@code BaseDto} instance. */
+  public BaseDto() {}
 }

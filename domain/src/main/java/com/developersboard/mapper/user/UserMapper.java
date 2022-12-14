@@ -20,7 +20,7 @@ import org.mapstruct.factory.Mappers;
     unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserMapper {
 
-  /** The mapper instance. */
+  /** The {@code UserMapper} instance to provide access to the mapper implementation. */
   UserMapper MAPPER = Mappers.getMapper(UserMapper.class);
 
   /**
@@ -50,8 +50,8 @@ public interface UserMapper {
   /**
    * Convert and populate list of userDtos to Users.
    *
-   * @param userDtos List<UserDto>
-   * @return List<User>
+   * @param userDtos the list of userDto
+   * @return list of user
    */
   List<User> toUser(List<UserDto> userDtos);
 }

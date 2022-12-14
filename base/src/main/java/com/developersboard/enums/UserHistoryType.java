@@ -34,9 +34,16 @@ public enum UserHistoryType {
 
   /** This will be used for account locking. */
   ACCOUNT_LOCKED("Account Locked"),
+
+  /** This will be used for account unlocking. */
   ACCOUNT_UNLOCKED("Account unlocked"),
+
+  /** This will be used for account expiry. */
   ACCOUNT_EXPIRED("Account Expired"),
+
+  /** This will be used for credentials expiry. */
   CREDENTIALS_LOCKED("Credentials Locked");
 
+  /** The name of the history type which is the string value attached to the enum constant. */
   private final String name;
 }

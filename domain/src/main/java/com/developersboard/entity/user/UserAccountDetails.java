@@ -25,4 +25,10 @@ class UserAccountDetails extends LoginActivity {
   private Boolean accountNonExpired;
   private Boolean accountNonLocked;
   private Boolean credentialsNonExpired;
+
+  /**
+   * Creates a new {@code UserAccountDetails} instance. This is required by {@code Hibernate} to
+   * create new instances via reflection.
+   */
+  UserAccountDetails() {}
 }

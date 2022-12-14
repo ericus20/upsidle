@@ -7,7 +7,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -21,19 +20,34 @@ import lombok.ToString;
  */
 @Getter
 @Entity
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class UserHistory extends BaseEntity<Long> implements Serializable {
 
   @Serial private static final long serialVersionUID = -6902081317651761040L;
 
+  /**
+   * The user whom a particular modification is made to.
+   *
+   * @see User
+   */
   @Setter
   @ToString.Exclude
   @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
   private User user;
 
+  /**
+   * The type of modification made to the user.
+   *
+   * @see UserHistoryType
+   */
   @Enumerated(EnumType.ORDINAL)
   private UserHistoryType userHistoryType;
+
+  /**
+   * Creates a new {@code UserHistory} instance. This is required by {@code Hibernate} to create new
+   * instances via reflection.
+   */
+  public UserHistory() {}
 
   /**
    * Constructor for UserHistory.

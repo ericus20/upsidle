@@ -29,6 +29,8 @@ import org.springframework.data.jpa.domain.support.AuditingEntityListener;
  *
  * @author Eric Opoku
  * @version 1.0.0
+ * @param <T> The primary key type which must be serializable.
+ * @see Serializable
  * @since 1.0.0
  */
 @Getter
@@ -61,6 +63,7 @@ public class BaseEntity<T extends Serializable> {
   @GeneratedValue(strategy = GenerationType.SEQUENCE, generator = SEQUENCE_GENERATOR_NAME)
   private T id;
 
+  /** Public facing id used to uniquely accessed user in the users table. */
   @Column(unique = true, nullable = false)
   @NotBlank(message = "Public facing id is needed for all entities")
   private String publicId;
@@ -79,6 +82,12 @@ public class BaseEntity<T extends Serializable> {
   @Column @LastModifiedDate private OffsetDateTime updatedAt;
 
   @Column @LastModifiedBy private String updatedBy;
+
+  /**
+   * Creates a new {@code BaseEntity} instance. This is required by {@code Hibernate} to create new
+   * instances via reflection.
+   */
+  public BaseEntity() {}
 
   /**
    * Evaluate the equality of BaseEntity class.

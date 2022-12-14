@@ -7,7 +7,6 @@
 plugins {
     // Apply the common convention plugin for shared build configuration between library and application projects.
     id 'upsidle.java-common-conventions'
-    id 'test-report-aggregation'
 
     // Apply the application plugin to add support for building a CLI application in Java.
     id 'application'
@@ -16,38 +15,6 @@ plugins {
 
 }
 
-testing {
-    suites {
-        integrationTest(JvmTestSuite) {
-            dependencies {
-                implementation project()
-            }
-
-            targets {
-                all {
-                    testTask.configure {
-                        maxHeapSize = '512m'
-                        shouldRunAfter(test)
-                    }
-                }
-            }
-        }
-    }
-}
-
-tasks.named('check') {
-    dependsOn(testing.suites.integrationTest)
-}
-
 bootJar {
     enabled = true
-}
-
-tasks.named('integrationTestAggregateTestReport') {
-    dependsOn tasks.named('testAggregateTestReport', TestReport)
-    mustRunAfter 'testAggregateTestReport'
-}
-
-tasks.named('check') {
-    dependsOn tasks.named('integrationTestAggregateTestReport', TestReport)
 }

@@ -18,7 +18,8 @@ import org.mapstruct.factory.Mappers;
 @Mapper(unmappedTargetPolicy = ReportingPolicy.IGNORE)
 public interface UserHistoryMapper {
 
-  UserHistoryMapper MAPPER = Mappers.getMapper(UserHistoryMapper.class);
+  /** The {@code UserHistoryMapper} instance to provide access to the mapper implementation. */
+  UserHistoryMapper INSTANCE = Mappers.getMapper(UserHistoryMapper.class);
 
   /**
    * Convert and populate a userHistories to userHistoryDto object.

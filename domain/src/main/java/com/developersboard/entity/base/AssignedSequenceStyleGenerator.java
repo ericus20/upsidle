@@ -14,6 +14,9 @@ import org.hibernate.id.enhanced.SequenceStyleGenerator;
  */
 public class AssignedSequenceStyleGenerator extends SequenceStyleGenerator {
 
+  /** Creates a new {@code AssignedSequenceStyleGenerator} instance. */
+  public AssignedSequenceStyleGenerator() {}
+
   @Override
   public Serializable generate(SharedSessionContractImplementor session, Object object) {
     if (object instanceof Identifiable<? extends Serializable> identifiable) {

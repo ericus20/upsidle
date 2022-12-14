@@ -19,7 +19,7 @@ import org.mapstruct.factory.Mappers;
     uses = {UserMapper.class, RoleMapper.class})
 public interface UserRoleMapper {
 
-  /** The mapper instance. */
+  /** The {@code UserRoleMapper} instance to provide access to the mapper implementation. */
   UserRoleMapper MAPPER = Mappers.getMapper(UserRoleMapper.class);
 
   /**

@@ -13,6 +13,7 @@ plugins {
 
     // NOTE: external plugin version is specified in implementation dependency artifact of the project's build file
     id 'com.diffplug.spotless'
+    id 'test-report-aggregation'
 }
 
 repositories {
@@ -39,10 +40,42 @@ java {
     toolchain {
         languageVersion = JavaLanguageVersion.of(19)
     }
+    withJavadocJar()
+    withSourcesJar()
 }
 
-tasks.named('test') {
-    useJUnitPlatform()
+javadoc {
+    exclude([
+            "**/com/developersboard/constant/**",
+    ])
+}
+
+testing {
+    suites {
+        test {
+            useJUnitJupiter()
+        }
+
+        integrationTest(JvmTestSuite) {
+            dependencies {
+                implementation project()
+            }
+
+            targets {
+                all {
+                    testTask.configure {
+                        shouldRunAfter(test)
+                    }
+                }
+            }
+        }
+    }
+}
+
+
+tasks.named('check') {
+    dependsOn(testing.suites.integrationTest)
+    dependsOn tasks.named('integrationTestAggregateTestReport', TestReport)
 }
 
 tasks.withType(Test).configureEach {
@@ -50,6 +83,11 @@ tasks.withType(Test).configureEach {
     // Fail the 'test' task on the first test failure
     failFast = true
     maxParallelForks = Runtime.runtime.availableProcessors().intdiv(2) ?: 1
+}
+
+tasks.named('integrationTestAggregateTestReport') {
+    dependsOn tasks.named('testAggregateTestReport', TestReport)
+    mustRunAfter 'testAggregateTestReport'
 }
 
 tasks.withType(JavaCompile).configureEach {

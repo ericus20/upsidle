@@ -9,7 +9,6 @@ import java.io.Serial;
 import java.io.Serializable;
 import java.util.Objects;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
@@ -23,19 +22,34 @@ import lombok.ToString;
 @Getter
 @Setter
 @Entity
-@NoArgsConstructor
 @ToString(callSuper = true)
 public class UserRole extends BaseEntity<Long> implements Serializable {
 
   @Serial private static final long serialVersionUID = -4137474921588375398L;
 
+  /**
+   * The user whom this role is associated with.
+   *
+   * @see User
+   */
   @ToString.Exclude
   @ManyToOne(fetch = FetchType.LAZY, targetEntity = User.class)
   private User user;
 
+  /**
+   * The particular role assigned to the user.
+   *
+   * @see Role
+   */
   @ToString.Exclude
   @ManyToOne(fetch = FetchType.LAZY, targetEntity = Role.class, cascade = CascadeType.MERGE)
   private Role role;
+
+  /**
+   * Creates a new {@code UserRole} instance. This is required by {@code Hibernate} to create new
+   * instances via reflection.
+   */
+  public UserRole() {}
 
   /**
    * Constructor for UserRole.

@@ -25,4 +25,10 @@ class LoginActivity extends BaseEntity<Long> {
 
   private Integer failedLoginAttempts;
   private OffsetDateTime lastSuccessfulLogin;
+
+  /**
+   * Creates a new {@code LoginActivity} instance. This is required by {@code Hibernate} to create
+   * new instances via reflection.
+   */
+  LoginActivity() {}
 }

@@ -5,14 +5,13 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.Id;
 import java.util.Objects;
 import lombok.Getter;
-import lombok.NoArgsConstructor;
 import lombok.Setter;
 import lombok.ToString;
 
 /**
  * The role entity.
  *
- * @author George Anguah
+ * @author Eric Opoku
  * @version 1.0
  * @since 1.0
  */
@@ -20,11 +19,16 @@ import lombok.ToString;
 @Getter
 @Setter
 @ToString
-@NoArgsConstructor
 public class Role {
 
   @Id private Integer id;
   private String name;
+
+  /**
+   * Creates a new {@code Role} instance. This is required by {@code Hibernate} to create new
+   * instances via reflection.
+   */
+  public Role() {}
 
   /**
    * The Role class creates a role for the user.
